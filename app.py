@@ -120,7 +120,7 @@ interface = gr.Interface(
     inputs=gr.Files(),
     outputs=["json", "file"],
     title="Image Classification - Evaluation with ViT",
-    description="Upload a zip file containing images organized by labels to evaluate them using two Vision Transformer models."
+    description="Upload a zip file containing images organized by labels"
 )
 
 if __name__ == "__main__":
