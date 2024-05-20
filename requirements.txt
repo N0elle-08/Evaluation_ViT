@@ -1,0 +1,13 @@
+gradio
+requests
+Pillow
+transformers
+datasets
+evaluate
+torch
+torchvision
+numpy
+pandas
+evaluate
+scikit-learn
+transformers[torch]
