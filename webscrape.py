@@ -5,7 +5,7 @@ from io import BytesIO
 from PIL import Image, UnidentifiedImageError
 import time
 
-# Define search terms
+#Define search terms
 term_1 = "rose"
 term_2 = "dandelion"
 term_3 = "sunflower"
@@ -15,10 +15,10 @@ term_5 = "orchid"
 search_terms = sorted([term_1, term_2, term_3, term_4, term_5])
 search_terms = [x for x in search_terms if x.strip() != '']
 
-# Search URL
+#Search URL
 SEARCH_URL = "https://huggingpics-api-server.fly.dev/images/search"
 
-# Function to get image URLs by search term
+#Function to get image URLs by search term
 def get_image_urls_by_term(search_term: str, count=10):
     params = {"q": search_term, "license": "public", "imageType": "photo", "count": count}
     response = requests.get(SEARCH_URL, params=params)
@@ -27,7 +27,7 @@ def get_image_urls_by_term(search_term: str, count=10):
     image_urls = [img['thumbnailUrl'] for img in response_data['value']]
     return image_urls
 
-# Function to fetch images from URLs with retry logic
+#fetch images from URLs 
 def fetch_image(url, retries=3, backoff_factor=0.3):
     for i in range(retries):
         try:
@@ -41,7 +41,7 @@ def fetch_image(url, retries=3, backoff_factor=0.3):
                 print(f"Failed to fetch image from {url}: {e}")
     return None
 
-# Generator to yield images from URLs
+#Generator to yield images from URLs
 def gen_images_from_urls(urls):
     num_skipped = 0
     for url in urls:
@@ -58,12 +58,12 @@ def urls_to_image_folder(urls, save_directory):
         if image:
             image.save(save_directory / f'{i}.jpg')
 
-# Directory to save images
+#Directory to save images
 data_dir = Path('images')
 if data_dir.exists():
     shutil.rmtree(data_dir)
 
-# Fetch and save images for each search term
+#Fetch and save images for each search term
 for search_term in search_terms:
     search_term_dir = data_dir / search_term
     search_term_dir.mkdir(exist_ok=True, parents=True)
@@ -71,6 +71,6 @@ for search_term in search_terms:
     print(f"Saving images of {search_term} to {str(search_term_dir)}...")
     urls_to_image_folder(urls, search_term_dir)
 
-# Compress the images folder into a zip file
+
 shutil.make_archive('images', 'zip', 'images')
 
