@@ -100,7 +100,7 @@ def upload_and_evaluate(uploaded_files):
     
     for model_name in results:
         if "eval_accuracy" in results[model_name]:
-            results[model_name]["eval_accuracy"] *= 100  
+            results[model_name]["eval_accuracy"] = round(results[model_name]["eval_accuracy"] * 100, 2)  
 
     
     shutil.rmtree(temp_dir)
