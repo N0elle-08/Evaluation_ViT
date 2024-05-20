@@ -1,11 +1,11 @@
 Model,Metric,Value
 google/vit-base-patch16-224,eval_loss,6.5761284828186035
 google/vit-base-patch16-224,eval_accuracy,17.02127659574468
-google/vit-base-patch16-224,eval_runtime,23.3604
-google/vit-base-patch16-224,eval_samples_per_second,2.012
-google/vit-base-patch16-224,eval_steps_per_second,0.257
+google/vit-base-patch16-224,eval_runtime,21.6019
+google/vit-base-patch16-224,eval_samples_per_second,2.176
+google/vit-base-patch16-224,eval_steps_per_second,0.278
 jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_loss,4.629232883453369
 jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_accuracy,38.297872340425535
-jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_runtime,18.129
-jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_samples_per_second,2.593
-jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_steps_per_second,0.331
+jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_runtime,17.978
+jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_samples_per_second,2.614
+jonathanfernandes/vit-base-patch16-224-finetuned-flower,eval_steps_per_second,0.334
