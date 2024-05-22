@@ -6,6 +6,7 @@ from pathlib import Path
 from PIL import Image
 import gradio as gr
 import numpy as np
+import pandas as pd
 from transformers import ViTForImageClassification, ViTFeatureExtractor, AutoImageProcessor
 from datasets import Dataset
 import evaluate
@@ -100,12 +101,21 @@ def evaluate_model(model, feature_extractor, dataset_dir):
 def save_detailed_results_to_csv(results, output_dir, filename):
     os.makedirs(output_dir, exist_ok=True)
     file_path = os.path.join(output_dir, filename)
-    with open(file_path, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["Model", "Metric", "Value"])
-        for model_name, metrics in results.items():
-            for metric_name, value in metrics.items():
-                writer.writerow([model_name, metric_name, value])
+    
+    # Extract models as rows and their keys as columns
+    data = {}
+    for model, metrics in results.items():
+        data[model] = metrics
+
+    # Convert to DataFrame
+    df = pd.DataFrame.from_dict(data, orient='index')
+
+    # Reset index to make "Model" a column
+    df.reset_index(inplace=True)
+    df.rename(columns={'index': 'Model'}, inplace=True)
+    
+    # Save DataFrame to CSV
+    df.to_csv(file_path, index=False)
     return os.path.abspath(file_path)
 
 def upload_and_evaluate(uploaded_files):
